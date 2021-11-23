@@ -146,6 +146,22 @@ export const addSucc = <L, R> (l: Succ<L>, r: R): Succ<Add<L,R>> => {
 export const tst3 = add(n_2, n_1) //const tst3: Succ<Succ<Succ<"zero">>>  
 
 
+/*
+Some explanation
+================
+
+TS seems to be clunky supporting the conditional types with infer
+as shown by the following example:
+*/
+
+type HasContent<C> = {content: C}
+
+type GetContent<T> = T extends HasContent <infer C> ? C : T
+
+const getContent = <C, T extends HasContent<C>> (t: T) : GetContent<T> => {
+   //return t.content //compiler error:  Type 'C' is not assignable to type 'GetContent<T>'
+   return t.content as any
+}
 
 
 /*
