@@ -1,4 +1,6 @@
 
+// utility hole for typechecking
+declare function _<T>(): T
 
 /*
 Peano numbers with + arithmetic. 
@@ -187,11 +189,12 @@ export const n___3:  Nat  = n_3
 
 
 
+
 /*
 Assume we have implemented this somehow:
 */
 export const add2 = <L extends Nat, R extends Nat> (l:L, r: R): Add<L,R> => {
-   return {} as any //cast to satisfy the typechecker
+   return _() //hole to satisfy typechecker
 }
 
 /*
@@ -203,7 +206,7 @@ This is not surprising as `Nat` is potentially an infinite structure.
 */
 export const addNat = <L extends Nat, R extends Nat> (l: L, r: R): Nat => { 
    //return add2(l, r) //'Type instantiation is excessively deep and possibly infinite'
-   return {} as any
+   return _()
 }
 
 /*
@@ -211,7 +214,7 @@ Same for this attempt
 */
 export const addNat_ =  (l: Nat, r: Nat): Nat => { 
     // return add2(l, r) //'Type instantiation is excessively deep and possibly infinite'
-    return {} as any
+    return _()
  }
  
 
